@@ -1,20 +1,50 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    hello
+    <v-container>
+      <v-row>
+        <v-col>
+        <v-textarea
+          outlined
+          name="input"
+          label="Input CSV"
+          value=""
+          aria-placeholder="Paste CSV here"
+          @change="update"
+          @keypress="update"
+          v-model="input"
+        ></v-textarea>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+        <v-textarea
+          outlined
+          name="output"
+          label="Output CSV"
+          v-model="output"
+        ></v-textarea>
+            </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import HelloWorld from './components/HelloWorld.vue'
+import farnell from './lib/Farnell'
 
 @Component({
-  components: {
-    HelloWorld
-  }
+  components: {}
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  private input = ''
+  private output = ''
+
+  private update () {
+    this.output = farnell(this.input)
+  }
+}
 </script>
 
 <style>
